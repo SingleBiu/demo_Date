@@ -1,9 +1,7 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include"date.h"
-#define DEBUG 1
-#define ERROR -1
 int year, month ,day, hour, minute ,second;
-
 
 int i_get_initial_day()
 {
@@ -55,25 +53,128 @@ int i_get_initial_day()
 
 void v_display()
 {
-	
+	while (1)
+	{
+		if (year%4 == 0 || year%400 == 0)
+		{
+			#if DEBUG
+				printf("Year:%d is leap year\n",year);
+			#endif
+
+			#if 1
+
+				sleep(1);
+				printf("Current time: %d/%d/%d %d:%d:%d\n",year,month,day,hour,minute,second);
+				second++;
+				if (second >59)
+				{
+					second = 0;
+					minute ++;
+				}
+				if (minute > 59)
+				{
+					minute = 0;
+					hour++;
+				}
+				if (hour > 23)
+				{
+					day++;
+					hour = 0;
+				}
+				if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+				{
+					if (day > 31)
+					{
+						day = 1;
+						month++;
+					}
+				}else if (month == 4 || month == 6 || month == 9 || month == 11)
+				{
+					if (day > 30)
+					{
+						day = 1;
+						month++;
+					}
+				}
+				else
+				{
+					if (day >29)
+					{
+						day = 1;
+						month++;
+					}
+				}				
+				if (month > 12)
+				{
+					year++;
+					month = 1;
+				}
+				
+			#endif
+		}
+		else
+		{
+			#if DEBUG
+				printf("Year:%d is not a leap year\n",year);
+			#endif
+
+			sleep(1);
+			printf("Current time: %d/%d/%d %d:%d:%d\n",year,month,day,hour,minute,second);
+			second++;
+			if (second >59)
+			{
+				second = 0;
+				minute ++;
+			}
+			if (minute > 59)
+			{
+				minute = 0;
+				hour++;
+			}
+			if (hour > 23)
+			{
+				day++;
+				hour = 0;
+			}
+			if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+			{
+				if (day > 31)
+				{
+					day = 1;
+					month++;
+				}
+			}else if (month == 4 || month == 6 || month == 9 || month == 11)
+			{
+				if (day > 30)
+				{
+					day = 1;
+					month++;
+				}
+			}
+			else
+			{
+				if (day >28)
+				{
+					day = 1;
+					month++;
+				}
+			}				
+			if (month > 12)
+			{
+				year++;
+				month = 1;
+			}
+		}
+	}
 }
 
 int main()
 {
-	printf("Hello world!\n");
+	printf("Hello! Welcome to use this time tool.\n");
 	
 	i_get_initial_day();
 	
-	/*int input;
-	while(1)
-	{
-		scanf("%d",&input);
-		if(input%4 == 0 || input%400 == 0)
-		{
-			printf("Number:%d is leap year\n",input);
-		}
-		else
-			printf("Number:%d is not a leap year\n",input);
-	}*/
+	v_display();
+
 	return 0;
 }
