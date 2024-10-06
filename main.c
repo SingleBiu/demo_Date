@@ -1,3 +1,10 @@
+/*
+ * @Author: SingleBiu
+ * @Date: 2024-10-06 17:12:42
+ * @LastEditors: SingleBiu
+ * @LastEditTime: 2024-10-06 17:17:59
+ * @Description: file for demo_Date
+ */
 #include<stdio.h>
 #include<stdlib.h>
 #include"date.h"
@@ -7,6 +14,11 @@ int i_get_initial_day()
 {
 	printf("Please input year:\n");
 	scanf("%d",&year);
+	if (year < 2024 )
+	{
+		printf("Invalid input\n");
+		return ERROR;
+	}
 	printf("Please input month:\n");
 	scanf("%d",&month);
 	if (month <= 0 || month >= 13)
@@ -171,8 +183,16 @@ void v_display()
 int main()
 {
 	printf("Hello! Welcome to use this time tool.\n");
+
+begin:
+	system("clear");
+	int flag = 0;
+	flag = i_get_initial_day();
 	
-	i_get_initial_day();
+	if (-1 == flag)
+	{
+		goto begin;
+	}
 	
 	v_display();
 
